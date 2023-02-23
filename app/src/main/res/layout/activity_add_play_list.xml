@@ -7,48 +7,36 @@
     android:gravity="top"
     android:orientation="vertical"
     android:background="@drawable/homepage"
-    tools:context=".UserHome">
+    tools:context=".Add_PlayList">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Hey"
-        android:layout_marginTop="50dp"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <TextView
+       <TextView
         android:id="@+id/head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Want better recommendations? Pick"
-        android:layout_marginTop="10dp"
+        android:text="Create your Playlist now"
+        android:layout_marginTop="30dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/head2"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="some music you like."
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:ems="10"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@drawable/square"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint"
+        android:inputType="textPersonName"
+        android:hint="Playlist name" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/main"
@@ -56,7 +44,7 @@
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Choose MUSIC"
+        android:text="Create Playlist"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="@drawable/buttonc"
@@ -74,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Categories"
+        android:text="Playlists"
         android:layout_marginTop="40dp"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -84,28 +72,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
-    <HorizontalScrollView
+    <ListView
+        android:id="@+id/cat"
         android:layout_width="match_parent"
-
-        android:layout_height="200dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ListView
-                android:id="@+id/cat"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:scrollbarAlwaysDrawHorizontalTrack="true"
-                android:layout_marginLeft="20dp"
-                android:layout_height="165dp" />
+        android:layout_height="match_parent"
 
 
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:orientation="horizontal"
+        android:scrollbarAlwaysDrawHorizontalTrack="true" />
 
 
 </LinearLayout>

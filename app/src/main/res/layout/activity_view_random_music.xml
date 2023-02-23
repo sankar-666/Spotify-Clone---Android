@@ -7,7 +7,7 @@
     android:gravity="top"
     android:orientation="vertical"
     android:background="@drawable/homepage"
-    tools:context=".MusicbasedOn_category">
+    tools:context=".View_Random_Music">
 
     <TextView
         android:id="@+id/cathead"
@@ -15,18 +15,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Songs Based on Category"
-        android:layout_marginTop="60dp"
-        android:textSize="20dp"
+        android:text="Search"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="60dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="10dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@drawable/square"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint"
+        android:inputType="textPersonName"
+        android:hint="Category or Songs" />
+
     <ListView
         android:id="@+id/music"
         android:dividerHeight="5dp"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />

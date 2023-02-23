@@ -33,7 +33,7 @@ public class UserHome extends AppCompatActivity implements JsonResponse, Adapter
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full sc
         setContentView(R.layout.activity_user_home);
 
-        Button b1 = findViewById(R.id.team);
+        Button b1 = findViewById(R.id.main);
 
         l1=findViewById(R.id.cat);
         l1.setOnItemClickListener(this);
@@ -45,12 +45,12 @@ public class UserHome extends AppCompatActivity implements JsonResponse, Adapter
         JR.execute(q);
 
 
-//        b1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getApplicationContext(), ViewTeams.class));
-//            }
-//        });
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
+            }
+        });
 //
 //        b2.setOnClickListener(new View.OnClickListener() {
 //            @Override

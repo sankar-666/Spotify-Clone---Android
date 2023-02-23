@@ -8,12 +8,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +24,12 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MusicbasedOn_category extends AppCompatActivity implements JsonResponse, AdapterView.OnItemClickListener {
+public class View_Random_Music extends AppCompatActivity implements JsonResponse, AdapterView.OnItemClickListener {
+
 
     ListView lv1;
     String [] music,path,lyrics,mus_id,value;
-    public static String song,lyr,mid;
+    public static String song,lyr,mid,search;
 
     SharedPreferences sh;
 
@@ -37,10 +41,38 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
         getSupportActionBar().hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full sc
-        setContentView(R.layout.activity_musicbased_on_category);
+        setContentView(R.layout.activity_view_random_music);
 
-        TextView t1 = findViewById(R.id.cathead);
-        t1.setText("Songs Based on\t"+UserHome.catg);
+        EditText e1 = findViewById(R.id.search);
+
+
+        e1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                search = e1.getText().toString();
+
+                JsonReq JR=new JsonReq();
+                JR.json_response=(JsonResponse) View_Random_Music.this;
+                String q = "/searchsong?search="+search;
+                q=q.replace(" ","%20");
+                JR.execute(q);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -48,8 +80,8 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
         lv1.setOnItemClickListener(this);
 
         JsonReq JR=new JsonReq();
-        JR.json_response=(JsonResponse) MusicbasedOn_category.this;
-        String q = "/songs_basedon_catg?catid="+UserHome.cid;
+        JR.json_response=(JsonResponse) View_Random_Music.this;
+        String q = "/viewsong";
         q=q.replace(" ","%20");
         JR.execute(q);
     }
@@ -59,7 +91,7 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
         try {
 
             String method=jo.getString("method");
-            if(method.equalsIgnoreCase("songs_basedon_catg")){
+            if(method.equalsIgnoreCase("viewsong")){
                 String status=jo.getString("status");
                 Log.d("pearl",status);
                 if(status.equalsIgnoreCase("success")){
@@ -103,13 +135,23 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
 
                 }
 
-                else {
-                    Toast.makeText(getApplicationContext(), "No Songs Available in this Category!", Toast.LENGTH_SHORT).show();
 
-                }
             }
 
-        }catch (Exception e)
+            if(method.equalsIgnoreCase("add_fav")) {
+                String status = jo.getString("status");
+                Log.d("pearl", status);
+                if(status.equalsIgnoreCase("success")) {
+                    Toast.makeText(getApplicationContext(), " Added to Favourite", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
+                }else if(status.equalsIgnoreCase("duplicate")) {
+                    Toast.makeText(getApplicationContext(), "This Song is Already in Favourite!", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
+                }
+
+            }
+
+                }catch (Exception e)
         {
             // TODO: handle exception
 
@@ -125,16 +167,16 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
         startActivity(b);
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
         mid=mus_id[i];
         song=path[i];
         lyr=lyrics[i];
 
-        final CharSequence[] items = {"Play", "Lyrics"};
+        final CharSequence[] items = {"Play", "Add to Playlist", "Add to Favourite"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MusicbasedOn_category.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(View_Random_Music.this);
         // builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -143,8 +185,17 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
                 if (items[item].equals("Play")) {
 
 
-                } else if (items[item].equals("Lyrics")) {
-                    startActivity(new Intent(getApplicationContext(), Music_Lyrics.class));
+                } else if (items[item].equals("Add to Playlist")) {
+                    startActivity(new Intent(getApplicationContext(), Add_PlayList.class));
+
+                } else if (items[item].equals("Add to Favourite")) {
+
+
+                    JsonReq JR=new JsonReq();
+                    JR.json_response=(JsonResponse) View_Random_Music.this;
+                    String q = "/add_fav?lid="+sh.getString("log_id","")+"&mid="+View_Random_Music.mid;
+                    q=q.replace(" ","%20");
+                    JR.execute(q);
 
                 }
 

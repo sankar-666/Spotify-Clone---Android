@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#21AC68</color>
     <color name="secondary">#1f1135</color>
+    <color name="category">#310f42</color>
     <color name="hint">#C3C3C3</color>
 </resources>

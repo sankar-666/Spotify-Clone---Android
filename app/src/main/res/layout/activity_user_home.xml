@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
     android:orientation="vertical"
-    android:background="@color/secondary"
+    android:background="@drawable/homepage"
     tools:context=".UserHome">
 
     <TextView
@@ -15,61 +15,97 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="User Home"
-        android:textSize="25dp"
-        android:textStyle="italic|bold"
+        android:text="Hey"
+        android:layout_marginTop="50dp"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Want better recommendations? Pick"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/head2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="some music you like."
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/team"
-        android:layout_width="match_parent"
+        android:layout_width="230dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:text="View Teams"
+        android:layout_marginTop="12dp"
+        android:text="Choose MUSIC"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:background="@color/secondary"
+        android:background="@drawable/buttonc"
         android:textStyle="bold"
-        android:textColor="#fff"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tour"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/subhead"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="View Tournaments"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:background="@color/secondary"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Categories"
+        android:layout_marginTop="40dp"
+        android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Logout"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:background="@color/secondary"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        android:textColor="@color/white"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="200dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/cat"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:layout_marginLeft="20dp"
+                android:layout_height="165dp" />
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 
 </LinearLayout>

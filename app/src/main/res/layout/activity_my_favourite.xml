@@ -7,9 +7,7 @@
     android:gravity="top"
     android:orientation="vertical"
     android:background="@drawable/homepage"
-    tools:context=".ViewMy_Playlist">
-
-
+    tools:context=".MyFavourite">
 
     <TextView
         android:id="@+id/subhead"
@@ -17,24 +15,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Playlists"
+        android:text="My Favourite's"
         android:layout_marginTop="40dp"
-        android:textSize="20dp"
+        android:textSize="40dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_gravity="left"
         android:layout_marginLeft="20dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
     <ListView
-        android:id="@+id/cat"
+        android:id="@+id/music"
+        android:dividerHeight="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        android:orientation="horizontal"
-        android:scrollbarAlwaysDrawHorizontalTrack="true" />
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
 
 </LinearLayout>

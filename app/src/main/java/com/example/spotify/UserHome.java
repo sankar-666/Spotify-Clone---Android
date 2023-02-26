@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,6 +38,16 @@ public class UserHome extends AppCompatActivity implements JsonResponse, Adapter
 
         l1=findViewById(R.id.cat);
         l1.setOnItemClickListener(this);
+
+        ImageButton i1 = findViewById(R.id.imageButton);
+
+        i1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getApplicationContext(), Settings.class));
+            }
+        });
 
         JsonReq JR=new JsonReq();
         JR.json_response=(JsonResponse) UserHome.this;

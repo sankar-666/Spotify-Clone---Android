@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -24,12 +25,14 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 public class View_Random_Music extends AppCompatActivity implements JsonResponse, AdapterView.OnItemClickListener {
 
 
     ListView lv1;
-    String [] music,path,lyrics,mus_id,value;
-    public static String song,lyr,mid,search;
+    String [] music,path,lyrics,mus_id,value,image,category;
+    public static String song,lyr,mid,search,img,mus;
 
     SharedPreferences sh;
 
@@ -103,6 +106,8 @@ public class View_Random_Music extends AppCompatActivity implements JsonResponse
                     path=new String[ja1.length()];
                     lyrics=new String[ja1.length()];
                     mus_id=new String[ja1.length()];
+                    image=new String[ja1.length()];
+                    category=new String[ja1.length()];
                     value=new String[ja1.length()];
 
 
@@ -116,6 +121,8 @@ public class View_Random_Music extends AppCompatActivity implements JsonResponse
                         music[i]=ja1.getJSONObject(i).getString("music");
                         path[i]=ja1.getJSONObject(i).getString("path");
                         lyrics[i]=ja1.getJSONObject(i).getString("lyrics");
+                        image[i]=ja1.getJSONObject(i).getString("image");
+                        category[i]=ja1.getJSONObject(i).getString("category");
                         mus_id[i]=ja1.getJSONObject(i).getString("music_id");
 
 
@@ -126,11 +133,11 @@ public class View_Random_Music extends AppCompatActivity implements JsonResponse
 
 
                     }
-//				Custimage clist=new Custimage(this,photo);
-//				 lv1.setAdapter(clist);
+				Custimage clist=new Custimage(this,image,music,category);
+				 lv1.setAdapter(clist);
 
-                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
-                    lv1.setAdapter(ar);
+//                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
+//                    lv1.setAdapter(ar);
 
 
                 }
@@ -138,18 +145,18 @@ public class View_Random_Music extends AppCompatActivity implements JsonResponse
 
             }
 
-            if(method.equalsIgnoreCase("add_fav")) {
-                String status = jo.getString("status");
-                Log.d("pearl", status);
-                if(status.equalsIgnoreCase("success")) {
-                    Toast.makeText(getApplicationContext(), " Added to Favourite", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
-                }else if(status.equalsIgnoreCase("duplicate")) {
-                    Toast.makeText(getApplicationContext(), "This Song is Already in Favourite!", Toast.LENGTH_SHORT).show();
+//            if(method.equalsIgnoreCase("add_fav")) {
+//                String status = jo.getString("status");
+//                Log.d("pearl", status);
+//                if(status.equalsIgnoreCase("success")) {
+//                    Toast.makeText(getApplicationContext(), " Added to Favourite", Toast.LENGTH_SHORT).show();
 //                    startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
-                }
-
-            }
+//                }else if(status.equalsIgnoreCase("duplicate")) {
+//                    Toast.makeText(getApplicationContext(), "This Song is Already in Favourite!", Toast.LENGTH_SHORT).show();
+////                    startActivity(new Intent(getApplicationContext(), View_Random_Music.class));
+//                }
+//
+//            }
 
                 }catch (Exception e)
         {
@@ -173,35 +180,49 @@ public class View_Random_Music extends AppCompatActivity implements JsonResponse
         mid=mus_id[i];
         song=path[i];
         lyr=lyrics[i];
+        img=image[i];
+        mus=music[i];
 
-        final CharSequence[] items = {"Play", "Add to Playlist", "Add to Favourite"};
+        startActivity(new Intent(getApplicationContext(), MusicPlay.class));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(View_Random_Music.this);
-        // builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-
-                if (items[item].equals("Play")) {
-
-
-                } else if (items[item].equals("Add to Playlist")) {
-                    startActivity(new Intent(getApplicationContext(), Add_PlayList.class));
-
-                } else if (items[item].equals("Add to Favourite")) {
-
-
-                    JsonReq JR=new JsonReq();
-                    JR.json_response=(JsonResponse) View_Random_Music.this;
-                    String q = "/add_fav?lid="+sh.getString("log_id","")+"&mid="+View_Random_Music.mid;
-                    q=q.replace(" ","%20");
-                    JR.execute(q);
-
-                }
-
-            }
-
-        });
-        builder.show();
+//        final CharSequence[] items = {"Play", "Add to Playlist", "Add to Favourite"};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(View_Random_Music.this);
+//        // builder.setTitle("Add Photo!");
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int item) {
+//
+//                if (items[item].equals("Play")) {
+//
+//                    MediaPlayer mediaPlayer = new MediaPlayer();
+//
+//                    try {
+//                        mediaPlayer.reset();
+//                        mediaPlayer.setDataSource("http://"+IPSettings.text+"/"+song);
+//                        Toast.makeText(getApplicationContext(), "http://"+IPSettings.text+"/api"+song, Toast.LENGTH_SHORT).show();
+//                        mediaPlayer.prepare();
+//                        mediaPlayer.start();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//
+//
+//
+//                } else if (items[item].equals("Add to Playlist")) {
+//
+//
+//                } else if (items[item].equals("Add to Favourite")) {
+//
+//
+//
+//
+//                }
+//
+//            }
+//
+//        });
+//        builder.show();
     }
 }

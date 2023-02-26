@@ -9,32 +9,27 @@
     android:background="@drawable/homepage"
     tools:context=".ViewMy_Playlist">
 
-
-
     <TextView
-        android:id="@+id/subhead"
+        android:id="@+id/cathead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Playlists"
-        android:layout_marginTop="40dp"
+        android:text="Songs in "
+        android:layout_marginTop="60dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
     <ListView
-        android:id="@+id/cat"
+        android:id="@+id/music"
+        android:dividerHeight="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        android:orientation="horizontal"
-        android:scrollbarAlwaysDrawHorizontalTrack="true" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
 
 </LinearLayout>

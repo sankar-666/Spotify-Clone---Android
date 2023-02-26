@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#21AC68</color>
+    <color name="music">#242525</color>
     <color name="secondary">#1f1135</color>
     <color name="category">#310f42</color>
     <color name="hint">#9E9E9E</color>

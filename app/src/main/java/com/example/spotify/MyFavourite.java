@@ -23,8 +23,8 @@ import org.json.JSONObject;
 public class MyFavourite extends AppCompatActivity implements JsonResponse, AdapterView.OnItemClickListener {
 
     ListView lv1;
-    String [] music,path,lyrics,mus_id,value;
-    public static String song,lyr,mid,search;
+    String [] music,path,lyrics,mus_id,value,image,category;
+    public static String song,lyr,mid,img,mus;
 
     SharedPreferences sh;
 
@@ -68,6 +68,8 @@ public class MyFavourite extends AppCompatActivity implements JsonResponse, Adap
                     lyrics=new String[ja1.length()];
                     mus_id=new String[ja1.length()];
                     value=new String[ja1.length()];
+                    image=new String[ja1.length()];
+                    category=new String[ja1.length()];
 
 
 
@@ -80,6 +82,8 @@ public class MyFavourite extends AppCompatActivity implements JsonResponse, Adap
                         music[i]=ja1.getJSONObject(i).getString("music");
                         path[i]=ja1.getJSONObject(i).getString("path");
                         lyrics[i]=ja1.getJSONObject(i).getString("lyrics");
+                        image[i]=ja1.getJSONObject(i).getString("image");
+                        category[i]=ja1.getJSONObject(i).getString("category");
                         mus_id[i]=ja1.getJSONObject(i).getString("music_id");
 
 
@@ -93,8 +97,11 @@ public class MyFavourite extends AppCompatActivity implements JsonResponse, Adap
 //				Custimage clist=new Custimage(this,photo);
 //				 lv1.setAdapter(clist);
 
-                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
-                    lv1.setAdapter(ar);
+//                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
+//                    lv1.setAdapter(ar);
+
+                    Custimage clist=new Custimage(this,image,music,category);
+                    lv1.setAdapter(clist);
 
 
                 }else{
@@ -127,26 +134,31 @@ public class MyFavourite extends AppCompatActivity implements JsonResponse, Adap
         mid=mus_id[i];
         song=path[i];
         lyr=lyrics[i];
+        img=image[i];
+        mus=music[i];
 
-        final CharSequence[] items = {"Play"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyFavourite.this);
-        // builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-
-                if (items[item].equals("Play")) {
+        startActivity(new Intent(getApplicationContext(), MusicPlay.class));
 
 
-                } else if (items[item].equals("Add to Playlist")) {
-                    startActivity(new Intent(getApplicationContext(), Add_PlayList.class));
-
-                }
-
-            }
-
-        });
-        builder.show();
+//        final CharSequence[] items = {"Play"};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MyFavourite.this);
+//        // builder.setTitle("Add Photo!");
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int item) {
+//
+//                if (items[item].equals("Play")) {
+//
+//
+//                } else if (items[item].equals("Add to Playlist")) {
+//                    startActivity(new Intent(getApplicationContext(), Add_PlayList.class));
+//
+//                }
+//
+//            }
+//
+//        });
+//        builder.show();
     }
 }

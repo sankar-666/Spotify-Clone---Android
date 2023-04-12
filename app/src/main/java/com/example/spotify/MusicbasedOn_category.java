@@ -24,8 +24,8 @@ import org.json.JSONObject;
 public class MusicbasedOn_category extends AppCompatActivity implements JsonResponse, AdapterView.OnItemClickListener {
 
     ListView lv1;
-    String [] music,path,lyrics,mus_id,value;
-    public static String song,lyr,mid;
+    String [] music,path,lyrics,mus_id,value,image,category;
+    public static String song,lyr,mid,img,mus;
 
     SharedPreferences sh;
 
@@ -72,7 +72,8 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
                     lyrics=new String[ja1.length()];
                     mus_id=new String[ja1.length()];
                     value=new String[ja1.length()];
-
+                    image=new String[ja1.length()];
+                    category=new String[ja1.length()];
 
 
 
@@ -85,6 +86,8 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
                         path[i]=ja1.getJSONObject(i).getString("path");
                         lyrics[i]=ja1.getJSONObject(i).getString("lyrics");
                         mus_id[i]=ja1.getJSONObject(i).getString("music_id");
+                        image[i]=ja1.getJSONObject(i).getString("image");
+                        category[i]=ja1.getJSONObject(i).getString("category");
 
 
 
@@ -97,8 +100,11 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
 //				Custimage clist=new Custimage(this,photo);
 //				 lv1.setAdapter(clist);
 
-                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
-                    lv1.setAdapter(ar);
+//                    ArrayAdapter<String> ar= new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,value);
+//                    lv1.setAdapter(ar);
+
+                    Custimage clist=new Custimage(this,image,music,category);
+                    lv1.setAdapter(clist);
 
 
                 }
@@ -127,30 +133,33 @@ public class MusicbasedOn_category extends AppCompatActivity implements JsonResp
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
         mid=mus_id[i];
         song=path[i];
         lyr=lyrics[i];
+        img=image[i];
+        mus=music[i];
 
-        final CharSequence[] items = {"Play", "Lyrics"};
+        startActivity(new Intent(getApplicationContext(), MusicPlayCatg.class));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MusicbasedOn_category.this);
-        // builder.setTitle("Add Photo!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-
-                if (items[item].equals("Play")) {
-
-
-                } else if (items[item].equals("Lyrics")) {
-                    startActivity(new Intent(getApplicationContext(), Music_Lyrics.class));
-
-                }
-
-            }
-
-        });
-        builder.show();
+//        final CharSequence[] items = {"Play", "Lyrics"};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(MusicbasedOn_category.this);
+//        // builder.setTitle("Add Photo!");
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int item) {
+//
+//                if (items[item].equals("Play")) {
+//
+//
+//                } else if (items[item].equals("Lyrics")) {
+//                    startActivity(new Intent(getApplicationContext(), Music_Lyrics.class));
+//
+//                }
+//
+//            }
+//
+//        });
+//        builder.show();
     }
 }

@@ -26,7 +26,7 @@
 
     <ListView
         android:id="@+id/music"
-        android:dividerHeight="5dp"
+
         android:layout_width="match_parent"
         android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"

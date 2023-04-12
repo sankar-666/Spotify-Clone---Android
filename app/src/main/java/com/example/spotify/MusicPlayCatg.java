@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -21,13 +20,11 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-public class MusicPlay extends AppCompatActivity implements JsonResponse {
+public class MusicPlayCatg extends AppCompatActivity implements JsonResponse {
 
     ImageView i1;
     ImageButton pauseButton;
@@ -36,8 +33,6 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
     SeekBar musicSeekBar;
     private Handler handler = new Handler();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +40,15 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
         getSupportActionBar().hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full sc
-        setContentView(R.layout.activity_music_play);
+        setContentView(R.layout.activity_music_play_catg);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
 
-
         TextView t1 = findViewById(R.id.song);
-        t1.setText(View_Random_Music.mus);
-         i1 = findViewById(R.id.imageView);
+        t1.setText(MusicbasedOn_category.mus);
+        i1 = findViewById(R.id.imageView);
 
-        String pth = "http://"+IPSettings.text+"/"+View_Random_Music.img;
+        String pth = "http://"+IPSettings.text+"/"+MusicbasedOn_category.img;
         pth = pth.replace("~", "");
 //	       Toast.makeText(context, pth, Toast.LENGTH_LONG).show();
 
@@ -66,9 +60,10 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
 
 
 
-         mediaPlayer = new MediaPlayer();
+        mediaPlayer = new MediaPlayer();
+
         try {
-            mediaPlayer.setDataSource("http://"+IPSettings.text+"/"+View_Random_Music.song);
+            mediaPlayer.setDataSource("http://"+IPSettings.text+"/"+MusicbasedOn_category.song);
             mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,12 +103,7 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
             }
         });
 
-
-
-
-
-
-         musicSeekBar = findViewById(R.id.musicSeekBar);
+        musicSeekBar = findViewById(R.id.musicSeekBar);
         musicSeekBar.setMax(mediaPlayer.getDuration());
 
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -139,11 +129,6 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
             }
         });
 
-
-
-
-
-
         playButton.setVisibility(View.GONE);
 
 
@@ -162,12 +147,16 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
             public void onClick(View view) {
 
                 JsonReq JR=new JsonReq();
-                JR.json_response=(JsonResponse) MusicPlay.this;
+                JR.json_response=(JsonResponse) MusicPlayCatg.this;
                 String q = "/add_fav?lid="+sh.getString("log_id","")+"&mid="+View_Random_Music.mid;
                 q=q.replace(" ","%20");
                 JR.execute(q);
             }
         });
+
+
+
+
 
     }
 
@@ -224,8 +213,7 @@ public class MusicPlay extends AppCompatActivity implements JsonResponse {
     {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        Intent b=new Intent(getApplicationContext(),View_Random_Music.class);
+        Intent b=new Intent(getApplicationContext(),MusicbasedOn_category.class);
         startActivity(b);
     }
-
 }
